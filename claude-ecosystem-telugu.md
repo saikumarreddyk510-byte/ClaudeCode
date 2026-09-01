@@ -2380,3 +2380,428 @@ Bottom: Tokens
   Input tokens + Output tokens = what you pay for
   Output costs more than input
 ```
+
+---
+
+# PART 12: Normal Mode vs Extended Thinking — Code Examples
+
+## Normal Mode vs Extended Thinking — Difference Enti?
+
+```
+Normal Mode:
+  Prompt → Claude → Answer
+  Fast, default, most tasks ki sufficient
+
+Extended Thinking:
+  Prompt → Claude internally reasons (hidden scratchpad) → Answer
+  Slower, deeper, complex problems ki better
+```
+
+---
+
+## Setup — Install & API Key
+
+```python
+# Install cheyyadam
+# pip install anthropic
+
+import anthropic
+
+# Client create — ANTHROPIC_API_KEY env lo unte auto reads
+client = anthropic.Anthropic(api_key="sk-ant-...")
+```
+
+---
+
+## Normal Mode — Standard Response
+
+```python
+import anthropic
+
+client = anthropic.Anthropic()
+
+# Normal mode — default ga idi, extra settings avasaram ledu
+response = client.messages.create(
+    model="claude-sonnet-5",          # model choose
+    max_tokens=1024,                  # max output tokens
+    messages=[
+        {
+            "role": "user",
+            "content": "27 * 48 calculate cheyyi, step by step cheppu"
+        }
+    ]
+)
+
+# Response print
+print("=== Normal Mode Response ===")
+print(response.content[0].text)
+print(f"\nInput tokens:  {response.usage.input_tokens}")
+print(f"Output tokens: {response.usage.output_tokens}")
+print(f"Stop reason:   {response.stop_reason}")
+```
+
+**Output (normal mode):**
+```
+=== Normal Mode Response ===
+27 * 48 calculate cheyyadam:
+
+Step 1: 27 * 48 = 27 * (50 - 2)
+Step 2: 27 * 50 = 1350
+Step 3: 27 * 2  = 54
+Step 4: 1350 - 54 = 1296
+
+Answer: 1296
+
+Input tokens:  28
+Output tokens: 52
+Stop reason:   end_turn
+```
+
+---
+
+## Extended Thinking Mode — Deep Reasoning
+
+```python
+import anthropic
+
+client = anthropic.Anthropic()
+
+# Extended Thinking mode — thinking parameter add cheyyadam
+response = client.messages.create(
+    model="claude-sonnet-5",
+    max_tokens=16000,                 # extended thinking ki ekkuva tokens kaavali
+    thinking={
+        "type": "enabled",
+        "budget_tokens": 10000        # reasoning ki max tokens allocate cheyyadam
+        # budget_tokens = Claude reasoning ki use chesukone max tokens
+        # ekkuva = deeper thinking, kaani cost ekkuva
+    },
+    messages=[
+        {
+            "role": "user",
+            "content": "27 * 48 calculate cheyyi, step by step cheppu"
+        }
+    ]
+)
+
+print("=== Extended Thinking Mode Response ===")
+
+# Response lo rendu parts untay: thinking block + text block
+for block in response.content:
+    if block.type == "thinking":
+        # Claude's internal reasoning — meeru debug ki chudochu
+        print("\n--- Claude's Internal Thinking ---")
+        print(block.thinking)
+        print("--- End of Thinking ---\n")
+    elif block.type == "text":
+        # Final answer
+        print("--- Final Answer ---")
+        print(block.text)
+
+print(f"\nInput tokens:  {response.usage.input_tokens}")
+print(f"Output tokens: {response.usage.output_tokens}")
+```
+
+**Output (extended thinking):**
+```
+=== Extended Thinking Mode Response ===
+
+--- Claude's Internal Thinking ---
+Let me work through 27 * 48 carefully.
+
+I can break this down:
+27 * 48 = 27 * (40 + 8)
+       = (27 * 40) + (27 * 8)
+       = 1080 + 216
+       = 1296
+
+Let me verify another way:
+27 * 48 = (30 - 3) * 48
+       = (30 * 48) - (3 * 48)
+       = 1440 - 144
+       = 1296
+
+Both methods give 1296. Confirmed.
+--- End of Thinking ---
+
+--- Final Answer ---
+27 × 48 = **1296**
+
+Step-by-step:
+1. 27 × 48 = 27 × (40 + 8)
+2. 27 × 40 = 1080
+3. 27 × 8  = 216
+4. 1080 + 216 = **1296**
+
+Input tokens:  28
+Output tokens: 312
+```
+
+---
+
+## Extended Thinking — Complex Problem Example
+
+Simple math ki extended thinking overkill. Real difference complex problems lo kanipistundi:
+
+```python
+import anthropic
+
+client = anthropic.Anthropic()
+
+complex_problem = """
+Oka company ki 3 products unnay: A, B, C.
+- Product A: profit margin 30%, monthly sales 1000 units, price Rs.500
+- Product B: profit margin 20%, monthly sales 3000 units, price Rs.200
+- Product C: profit margin 40%, monthly sales 500 units, price Rs.800
+
+Marketing budget Rs.50,000 undi. Ela allocate chestే total profit maximize avutundi?
+Constraints: Prathi product ki minimum 20% budget ivvaali.
+"""
+
+# --- Normal Mode ---
+normal_response = client.messages.create(
+    model="claude-sonnet-5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": complex_problem}]
+)
+
+print("=== NORMAL MODE ===")
+print(normal_response.content[0].text[:500], "...")  # first 500 chars
+
+# --- Extended Thinking Mode ---
+extended_response = client.messages.create(
+    model="claude-sonnet-5",
+    max_tokens=16000,
+    thinking={
+        "type": "enabled",
+        "budget_tokens": 8000         # complex problem ki ekkuva budget
+    },
+    messages=[{"role": "user", "content": complex_problem}]
+)
+
+print("\n=== EXTENDED THINKING MODE ===")
+for block in extended_response.content:
+    if block.type == "thinking":
+        print(f"[Internal reasoning: {len(block.thinking)} chars]")
+    elif block.type == "text":
+        print("Final Answer:")
+        print(block.text)
+```
+
+---
+
+## Streaming tho Extended Thinking
+
+```python
+import anthropic
+
+client = anthropic.Anthropic()
+
+# Extended thinking + streaming combination
+with client.messages.stream(
+    model="claude-sonnet-5",
+    max_tokens=16000,
+    thinking={
+        "type": "enabled",
+        "budget_tokens": 5000
+    },
+    messages=[
+        {"role": "user", "content": "Quicksort algorithm implement cheyyi, time complexity explain cheyyi"}
+    ]
+) as stream:
+    current_block_type = None
+
+    for event in stream:
+        # Block type change detect cheyyadam
+        if hasattr(event, 'type'):
+            if event.type == 'content_block_start':
+                block = event.content_block
+                if block.type == 'thinking':
+                    print("\n[Claude thinking...]", end="", flush=True)
+                    current_block_type = 'thinking'
+                elif block.type == 'text':
+                    print("\n[Answer]:", end="", flush=True)
+                    current_block_type = 'text'
+
+            elif event.type == 'content_block_delta':
+                delta = event.delta
+                if hasattr(delta, 'thinking'):
+                    print(".", end="", flush=True)  # thinking progress dots
+                elif hasattr(delta, 'text'):
+                    print(delta.text, end="", flush=True)  # real-time answer
+```
+
+---
+
+## budget_tokens — How to Choose
+
+```python
+# budget_tokens = Claude reasoning ki allocate chesina max tokens
+# Ekkuva budget = deeper thinking, kaani:
+#   1. Cost ekkuva (reasoning tokens kuda count avutay)
+#   2. Time ekkuva (thinking cheyyadaniki time teesukuntundi)
+
+# Recommended values:
+budget_examples = {
+    "simple_math":       1000,   # 27*48 type simple calculations
+    "code_review":       5000,   # moderate complexity analysis
+    "architecture":      8000,   # system design decisions
+    "research_analysis": 10000,  # complex multi-faceted problems
+    "maximum":           32000,  # absolutely hardest problems (claude-opus-5 ki)
+}
+
+# Example — problem complexity based budget:
+def get_budget(problem_type):
+    return budget_examples.get(problem_type, 5000)  # default 5000
+
+response = client.messages.create(
+    model="claude-opus-5",            # hard problems ki Opus
+    max_tokens=20000,
+    thinking={
+        "type": "enabled",
+        "budget_tokens": get_budget("architecture")  # 8000
+    },
+    messages=[{"role": "user", "content": "Design a distributed caching system..."}]
+)
+```
+
+---
+
+## Normal vs Extended — Comparison Table
+
+```python
+# Ye situation lo edi choose cheyyali? — code perspective
+
+scenarios = {
+    "FAQ chatbot":            ("normal", "claude-haiku-4-5",  "Fast, cheap, simple"),
+    "Code generation":        ("normal", "claude-sonnet-5",   "Default, balanced"),
+    "Complex bug fix":        ("extended","claude-sonnet-5",  "Reasoning helps"),
+    "Math / logic problems":  ("extended","claude-sonnet-5",  "Step-by-step thinking"),
+    "Architecture design":    ("extended","claude-opus-5",    "Deep analysis needed"),
+    "Research synthesis":     ("extended","claude-opus-5",    "Multi-step reasoning"),
+    "Simple summarization":   ("normal", "claude-haiku-4-5",  "No deep thinking needed"),
+}
+
+for task, (mode, model, reason) in scenarios.items():
+    print(f"{task:<25} | {mode:<8} | {model:<20} | {reason}")
+```
+
+**Output:**
+```
+FAQ chatbot               | normal   | claude-haiku-4-5     | Fast, cheap, simple
+Code generation           | normal   | claude-sonnet-5      | Default, balanced
+Complex bug fix           | extended | claude-sonnet-5      | Reasoning helps
+Math / logic problems     | extended | claude-sonnet-5      | Step-by-step thinking
+Architecture design       | extended | claude-opus-5        | Deep analysis needed
+Research synthesis        | extended | claude-opus-5        | Multi-step reasoning
+Simple summarization      | normal   | claude-haiku-4-5     | No deep thinking needed
+```
+
+---
+
+## Cost Comparison — Normal vs Extended
+
+```python
+# Extended thinking tokens kuda cost avutay — billing example
+
+# Normal mode example:
+# Input: 100 tokens * $2/M = $0.0002
+# Output: 200 tokens * $10/M = $0.002
+# Total: $0.0022 per call
+
+# Extended thinking:
+# Input: 100 tokens * $2/M = $0.0002
+# Thinking: 5000 tokens * $2/M = $0.01    <-- reasoning tokens cost!
+# Output: 300 tokens * $10/M = $0.003
+# Total: $0.0132 per call (6x more expensive)
+
+# Rule:
+# Simple tasks  --> Normal mode (cheap)
+# Complex tasks --> Extended thinking (worth the extra cost for accuracy)
+
+# Rough cost estimate function:
+def estimate_cost(
+    input_tokens,
+    output_tokens,
+    thinking_tokens=0,
+    model="sonnet"
+):
+    rates = {
+        "haiku":  {"input": 1.0,  "output": 5.0},
+        "sonnet": {"input": 2.0,  "output": 10.0},
+        "opus":   {"input": 5.0,  "output": 25.0},
+    }
+    r = rates[model]
+    input_cost    = input_tokens   * r["input"]  / 1_000_000
+    output_cost   = output_tokens  * r["output"] / 1_000_000
+    thinking_cost = thinking_tokens * r["input"] / 1_000_000  # thinking = input rate
+    total = input_cost + output_cost + thinking_cost
+    print(f"Input cost:    ${input_cost:.6f}")
+    print(f"Thinking cost: ${thinking_cost:.6f}")
+    print(f"Output cost:   ${output_cost:.6f}")
+    print(f"Total:         ${total:.6f}")
+    return total
+
+print("Normal mode (sonnet):")
+estimate_cost(input_tokens=100, output_tokens=200, model="sonnet")
+
+print("\nExtended thinking (sonnet, 5000 budget):")
+estimate_cost(input_tokens=100, output_tokens=300, thinking_tokens=5000, model="sonnet")
+```
+
+**Output:**
+```
+Normal mode (sonnet):
+Input cost:    $0.000200
+Thinking cost: $0.000000
+Output cost:   $0.002000
+Total:         $0.002200
+
+Extended thinking (sonnet, 5000 budget):
+Input cost:    $0.000200
+Thinking cost: $0.010000
+Output cost:   $0.003000
+Total:         $0.013200
+```
+
+---
+
+## Quick Reference — Extended Thinking API
+
+```python
+# Enable extended thinking
+response = client.messages.create(
+    model="claude-sonnet-5",     # or claude-opus-5
+    max_tokens=16000,            # thinking + output tokens ki kaavali — ekkuva set cheyyadam
+    thinking={
+        "type": "enabled",       # enable cheyyadam
+        "budget_tokens": 10000   # max reasoning tokens (1024 minimum)
+    },
+    messages=[...]
+)
+
+# Response lo blocks:
+for block in response.content:
+    if block.type == "thinking":
+        # Claude's internal scratchpad — debug ki useful
+        print(block.thinking)
+    elif block.type == "text":
+        # Final answer
+        print(block.text)
+
+# Disable extended thinking (normal mode):
+response = client.messages.create(
+    model="claude-sonnet-5",
+    max_tokens=1024,
+    # thinking parameter ledu = normal mode
+    messages=[...]
+)
+
+# Rules:
+# 1. max_tokens > budget_tokens + expected output tokens set cheyyaali
+# 2. minimum budget_tokens = 1024
+# 3. Extended thinking tho temperature = 1 only (forced by API)
+# 4. Streaming supported — thinking blocks dots ga, answer real-time
+# 5. Models: claude-sonnet-5, claude-opus-5 support extended thinking
+#    claude-haiku-4-5 does NOT support extended thinking
+```
