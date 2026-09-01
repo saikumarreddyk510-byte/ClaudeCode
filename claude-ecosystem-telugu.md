@@ -1883,3 +1883,500 @@ Large org, regulated industry       --> Claude Enterprise
 > **Verified:** Anthropic docs, platform.claude.com, Claude Code CLI v2.1.237
 > **Style:** Telugu-English mix — prathi concept detailed ga, examples tho explain chesam
 > **Note:** Pricing verify cheyyadaniki: platform.claude.com/docs/en/about-claude/pricing
+
+---
+
+---
+
+# PART 11: Claude Reasoning Modes & Speed vs Intelligence (Image Explanation)
+
+> Image source: platform.claude.com/docs/en/about-claude/models/overview
+
+---
+
+## Image lo Chupinchindi — 3 Diagrams
+
+Image lo 3 separate diagrams unnay:
+
+```
+Diagram 1 (Left):   Claude Reasoning Modes — "Speed vs Deep Thinking"
+                    Normal Mode vs Extended Thinking Mode ela differ avutundoo
+
+Diagram 2 (Center): Claude Models — Speed vs Intelligence
+                    Haiku / Sonnet / Opus / Extended Thinking — model choose cheyyadam
+
+Diagram 3 (Right):  Claude Models — Choosing the right model for the task
+                    Prathi model ki detailed capabilities + use cases + selection rule
+
+Bottom:             Tokens/Text — Input → Output (basic concept)
+```
+
+---
+
+## Diagram 1: Claude Reasoning Modes — Speed vs Deep Thinking
+
+**Image lo tagline:** "Speed vs Deep Thinking"
+**Core message:** More thinking → better answers for complex problems, kaani time ekkuva
+
+### Normal Mode — Standard Response (Fast)
+
+```
+Flow:
+Prompt
+  |
+  v
+Quick Prediction  (Claude immediately respond chestundi)
+  |
+  v
+Answer
+
+Result: "Fast responses"
+```
+
+**Normal mode ante enti?**
+
+Meeru question adugutamu → Claude immediately answer istundi.
+Idi default behavior — prathi regular conversation lo ila jarigipotundi.
+
+```
+Strengths:
+  Speed       — fast, low latency
+  Simple Q&A  — straightforward questions ki perfect
+  Conversational — back-and-forth chat ki
+
+Best for:
+  "Python lo list sort ela cheyyali?"   — immediate answer
+  "Capital of India?"                   — instant recall
+  "Email draft cheyyi"                  — quick generation
+  Daily chat, FAQ, simple tasks
+```
+
+### Extended Mode — Extended Thinking (Deep Reasoning)
+
+```
+Flow:
+Prompt
+  |
+  v
+Reasoning Steps   <--- Claude internally "thinks" chestundi
+  |                    (meeru kanipiyyadam ledu — internal scratchpad)
+  v
+Evaluation        <--- Reasoning validate chestundi, better approach check
+  |
+  v
+Answer
+
+Result: "Deeper reasoning"
+```
+
+**Extended Thinking ante enti?**
+
+Claude answer iccheyyadaniki mundu **longer reasoning chestundi** — step by step.
+Idi "chain of thought" reasoning — hard problems ki accurate answers.
+
+```
+Strengths:
+  Deep reasoning    — complex math, logic, multi-step problems
+  Self-evaluation   — own thinking validate chestundi
+  Better accuracy   — hard problems lo less hallucination
+  Nuanced analysis  — ambiguous situations handle well
+
+Slower kaani smarter:
+  Normal mode:   50ms-2s response
+  Extended mode: 5-30s response (reasoning time)
+  Trade-off: Speed vs Accuracy
+```
+
+### Speed ↔ Reasoning Depth Trade-off
+
+```
+Image lo arrow:
+Speed <-----------------------> Reasoning Depth
+
+Normal Mode    |                         | Extended Mode
+(Fast)         |                         | (Deep thinking)
+               |                         |
+Quick answer   |     Middle ground       | Thorough answer
+Less accurate  |     (Sonnet default)    | More accurate
+for hard tasks |                         | for hard tasks
+```
+
+**Image lo bottom tagline:**
+```
+Question → Claude Thinking → Final Answer
+"More thinking improves complex problem solving"
+```
+
+---
+
+## Diagram 2: Claude Models — Speed vs Intelligence
+
+**Full axis:**
+```
+Fast ←─────────────────────────────────────────→ Deep Reasoning
+Haiku          Sonnet (default)          Opus
+```
+
+### Haiku — Fast, Simple, Cheap
+
+```
+Image lo description:
+  Fast
+  Simple tasks
+  Low cost
+  Quick answers
+
+Idi enduku choose cheyyali:
+  High-volume requests (thousands per day)
+  Real-time responses required
+  Simple, straightforward tasks
+  Cost optimization important
+
+Quick rule (image lo): "Haiku = quick tasks"
+```
+
+### Sonnet — Balanced, Everyday Work
+
+```
+Image lo description:
+  Balanced
+  Everyday work
+  Default model
+
+Idi enduku choose cheyyali:
+  Most day-to-day work
+  Coding, writing, analysis, research
+  Good speed + good quality balance
+  99% of use cases ki sufficient
+
+Quick rule (image lo): "Sonnet = most work"
+Image tagline: "Default model"
+```
+
+### Opus — Powerful, Complex, Advanced
+
+```
+Image lo description:
+  Powerful
+  Complex tasks
+  Deep reasoning
+  Advanced problems
+
+Idi enduku choose cheyyali:
+  Complex reasoning required
+  Long, intricate analysis
+  Scientific research, architecture decisions
+  When Sonnet insufficient
+
+Quick rule (image lo): "Opus = complex problems"
+```
+
+### Extended Thinking — Optional Layer
+
+```
+Image lo description:
+  "Think longer before answering"
+  complex problems
+  debugging
+  analysis
+  "Slower → smarter answers"
+```
+
+**Extended Thinking = separate feature (model kadu)**
+
+Idi Haiku/Sonnet/Opus tho alongside use cheyyochu (API lo enable cheyyadam possible).
+Model ni enable cheyyadam kadu — reasoning depth increase cheyyadam.
+
+```
+Without Extended Thinking:  Quick prediction → Answer
+With Extended Thinking:     Reason → Evaluate → Refine → Answer
+```
+
+### Complete Flow (Image lo)
+
+```
+User Prompt
+    |
+    v
+Claude Model (Haiku / Sonnet / Opus choose)
+    |
+    v
+(Optional) Extended Thinking
+    |
+    v
+Clear Answer
+
+"Match the model to the problem."
+```
+
+---
+
+## Diagram 3: Detailed Model Capabilities — Right Side
+
+### Claude Haiku — Speed Focused Model
+
+```
+Image lo:
+  Fastest response time
+  Optimized for simple tasks
+  Low cost / high efficiency
+  Great for real-time workloads
+
+Example use cases:
+  quick answers
+  summarization
+  chat assistants
+  automation at scale
+
+Image tagline:
+  "Speed focused model"
+  "Designed for high-volume tasks where speed matters most"
+```
+
+**Telugu explanation:**
+
+Haiku = production lo high-volume deployments ki backbone model.
+Prathi user request ki fast response kaavali, thousands of parallel requests handle cheyyali,
+cost kuda control lo unchali — aapudu Haiku perfect.
+
+```
+Real examples:
+  Customer support chatbot     — 10,000 conversations/day handle
+  Document auto-tagging        — 1 lakh docs classify cheyyadam
+  Real-time autocomplete       — typing lo suggestions
+  API rate limiting layer      — quick classification before expensive model
+```
+
+---
+
+### Claude Sonnet — Most Efficient Everyday Model
+
+```
+Image lo:
+  Balanced intelligence and speed
+  Strong reasoning ability
+  Handles longer context well
+  Best for everyday work
+
+Example use cases:
+  research
+  writing
+  analysis
+  coding
+
+Image tagline:
+  "Most efficient everyday model"
+  "Default model cost-to-use Claude users"
+```
+
+**Telugu explanation:**
+
+Sonnet = 90% of use cases ki go-to model.
+Speed too slow kaadu, intelligence too low kaadu — perfect balance.
+Anthropic itself "default to Sonnet" ani recommend chestundi.
+
+```
+Real examples:
+  Coding assistant          — feature implement, bug fix
+  RAG Q&A system            — document questions
+  Contract review           — clause analyze, risks flag
+  Email/report writing      — professional drafts
+  LangChain agent           — most agentic workflows
+```
+
+---
+
+### Claude Opus — Frontier Reasoning Model
+
+```
+Image lo:
+  Most capable Claude model
+  Strong reasoning and language
+  Strong coding and analysis
+  Best for complex problems
+
+Example use cases:
+  strategy planning
+  complex data analysis
+  AI agents
+
+Image tagline:
+  "Frontier reasoning model"
+  "Designed for difficult tasks and ambitious work"
+```
+
+**Telugu explanation:**
+
+Opus = Claude family lo most powerful. Cost ekkuva, kaani hardest problems solve chestundi.
+Claude Code lo heavy tasks ki default ga Opus 5 use avutundi.
+
+```
+Real examples:
+  Strategic business analysis   — market research, competitive analysis
+  Complex multi-step coding     — architecture redesign, performance optimization
+  Long-horizon AI agents        — days of autonomous work
+  Scientific research           — data analysis, hypothesis generation
+  When Sonnet result insufficient — final fallback
+```
+
+---
+
+### Extended Thinking Mode — Deep Analysis Layer
+
+```
+Image lo:
+  "Claude spends more time reasoning before answering"
+
+Benefits:
+  deeper reasoning
+  multi-step problem solving
+  complex planning
+  detailed analysis
+
+Example:
+  debugging code
+  designing systems
+  research analysis
+
+Image tagline: "Slower but more thoughtful answers"
+```
+
+**Telugu explanation:**
+
+Extended Thinking = Claude ki "think out loud" option.
+Normal lo Claude immediately answer istundi. Extended lo Claude internally reason chestundi,
+steps evaluate chestundi, tarvata final answer istundi.
+
+```
+When to enable Extended Thinking:
+  Math problems with multiple steps
+  Code architecture decisions
+  Ambiguous situations with nuance
+  Research questions requiring synthesis
+  Any time "fast answer" is wrong answer
+
+API lo enable cheyyadam:
+  model.create(..., thinking={"type": "enabled", "budget_tokens": 10000})
+```
+
+---
+
+### Model Selection Rule (Image lo)
+
+```
+Image lo clear rule:
+  Simple tasks      → Haiku
+  Most work         → Sonnet
+  Complex reasoning → Opus
+```
+
+**Detailed version:**
+
+```
+Task type                        | Choose     | Reason
+---------------------------------+------------+---------------------------
+FAQ chatbot, quick Q&A           | Haiku      | Speed + cost
+Summarization, classification    | Haiku      | Volume + efficiency
+Coding (feature work)            | Sonnet     | Balance
+Writing, research, analysis      | Sonnet     | Quality + speed
+RAG, document Q&A                | Sonnet     | Context handling
+Architecture decisions           | Opus       | Deep reasoning
+Complex debugging                | Opus       | Multi-step analysis
+Long autonomous agent runs       | Opus       | Sustained reasoning
+Strategy, research analysis      | Opus       | Nuanced judgment
+Any of the above, hard problems  | + Extended | More thorough answers
+```
+
+---
+
+### How Claude Processes Tasks (Image — Right Bottom)
+
+```
+Image lo flow:
+User Prompt
+    |
+    v (Designed to understand and show question complexity)
+Claude Model
+    |
+    v
+Extended Thinking (optional)
+    |
+    v (Choose the model based on task complexity)
+Structured Output
+
+Simple ga:
+  Input → Claude brain → (optional deeper thinking) → Output
+```
+
+---
+
+## Bottom of Image: Tokens/Text — Input → Output
+
+```
+Image lo:
+  Tokens / Text
+  Input ──────────────────────────────→ Output
+```
+
+**Token ante enti?**
+
+```
+Claude text ni "tokens" ga process chestundi — characters/words chunks.
+
+Examples:
+  "Hello"                = ~1 token
+  "Hello world"          = ~2 tokens
+  "import numpy as np"   = ~4 tokens
+  1 English word         =~ 1.3 tokens average
+  1000 words             =~ 1300 tokens
+
+Pricing token based:
+  Input tokens  = meeru send chesindi (prompt + context)
+  Output tokens = Claude generate chesindi (response)
+  Output tokens are more expensive than input tokens
+```
+
+**Input → Output flow:**
+
+```
+Input side (what you send):
+  System prompt    ─┐
+  Chat history     ─┤─→ ALL counted as INPUT tokens → meeru pay
+  Documents        ─┤    ($2/M for Sonnet 5)
+  User message     ─┘
+
+Output side (what Claude returns):
+  Response text    ─→ OUTPUT tokens → meeru pay
+                       ($10/M for Sonnet 5 — 5x more than input)
+
+Optimization tip:
+  Short, clear prompts  → takkuva input tokens → cost takkuva
+  Concise responses     → takkuva output tokens → cost takkuva
+  Caching               → repeated prefix 90% cheaper
+```
+
+---
+
+## Summary — Image lo 3 Diagrams oka Saari
+
+```
+Diagram 1: Reasoning Modes
+  Normal Mode    = Prompt → Quick Answer (fast, default)
+  Extended Mode  = Prompt → Think → Evaluate → Better Answer (slower, deeper)
+  Trade-off: Speed ↔ Reasoning Depth
+
+Diagram 2: Model Selection Spectrum
+  Fast ──── Haiku ──── Sonnet ──── Opus ──── Deep Reasoning
+  Optional Extended Thinking any model tho add cheyyochu
+
+Diagram 3: Detailed Capabilities
+  Haiku  = Speed focused, high-volume, cheap
+  Sonnet = Balanced, everyday default, most efficient
+  Opus   = Frontier reasoning, complex tasks, ambitious work
+  Extended Thinking = Deeper answers, debugging, research
+  Rule: Simple→Haiku, Most→Sonnet, Complex→Opus
+
+Bottom: Tokens
+  Input tokens + Output tokens = what you pay for
+  Output costs more than input
+```
