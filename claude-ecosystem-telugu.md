@@ -2805,3 +2805,361 @@ response = client.messages.create(
 # 5. Models: claude-sonnet-5, claude-opus-5 support extended thinking
 #    claude-haiku-4-5 does NOT support extended thinking
 ```
+
+---
+
+---
+
+# PART 13: Web Search vs Research Mode — Complete Guide
+
+> Image lo chupinchindi: **"Same toggle bar — very different jobs"**
+> Web Search = Fast (seconds) ←────────────────→ Research Mode = Deep (up to 45 min)
+> Rendu kuda Claude.ai lo toggle chesi use cheyyochu — kaani completely different purposes
+
+---
+
+## Image lo Full Diagram — Explained
+
+```
+                Web Search vs Research Mode
+           "Same toggle bar — very different jobs"
+
+Fast — seconds ←─────────────────────────────────→ Deep — up to 45 minutes
+
+┌─────────────────────────┐         ┌──────────────────────────────┐
+│      Web Search         │   VS    │       Research Mode          │
+│   (magnifier + bolt)    │ ←───→   │    (brain + document)        │
+│                         │         │                              │
+│ • Runs 1 quick search   │         │ • Writes its own plan        │
+│ • Results 5-15 seconds  │         │ • Visits multiple websites   │
+│ • Best for facts & news │         │ • Cross-references & synth   │
+│ • Single answer + cites │         │ • Produces 1-2 page report   │
+│ • Toggle OFF by default │         │ • Runs 2-45 min              │
+│                         │         │                              │
+│ "Quick fact. Right now."│         │ "Your analyst. Full brief."  │
+└─────────────────────────┘         └──────────────────────────────┘
+
+Flow:
+[Question] → [Pick the Right Mode] → [Cited Output] → [Share or Act]
+"Neither mode stays on — toggle before every new chat"
+
+Use Which?
+  Price of something      → Web Search
+  Competitive landscape   → Research Mode
+  Recent news             → Web Search
+  Board-ready brief       → Research Mode
+```
+
+---
+
+## 1. Web Search — "Quick Fact. Right Now."
+
+**Web Search ante enti?**
+
+Claude.ai lo real-time internet access. Oka question ki oka quick live search run chestundi — seconds lo answer vastundi.
+
+**Image lo features:**
+
+```
+• Runs 1 quick live search      — oka search query run chestundi
+• Results in 5–15 seconds       — fast response, low latency
+• Best for current facts & news — real-time data kaavali ante idi
+• Single answer, with citations — oka clean answer + source links
+• Toggle OFF by default         — every new chat lo manually turn on cheyyali
+```
+
+**Enduku Web Search use cheyyali?**
+
+```
+Telugu: Quick, factual information kaavali ante
+
+Examples:
+  "Today's dollar to rupee exchange rate?"  → 5 seconds lo answer
+  "Who won IPL 2025?"                       → recent news, quick fact
+  "Python 3.13 release date?"               → specific fact
+  "Current price of gold?"                  → real-time price
+  "Latest Claude model release?"            → current news
+
+Idi enduku fast avutundi:
+  Oka search query run → top results read → answer synthesize → done
+  Complex analysis kadu — just facts fetch cheyyadam
+```
+
+**When NOT to use Web Search:**
+
+```
+"Who are the top 5 AI companies and their strategy?" → Research Mode use cheyyandi
+"Market analysis of EV industry?"                  → Research Mode use cheyyandi
+Web Search = single quick lookup
+             Complex multi-angle analysis kadu
+```
+
+---
+
+## 2. Research Mode — "Your Analyst. Full Brief."
+
+**Research Mode ante enti?**
+
+Claude ki oka research analyst laga pani chestuundi. Meeru question ichi vellipotam — Claude plan raasi, multiple websites visit chesi, information cross-reference chesi, complete report prepare chestundi.
+
+**Image lo features:**
+
+```
+• Writes its own research plan  — question based on plan create chestundi
+• Visits multiple websites      — different sources check chestundi
+• Cross-references and synth    — sources compare, contradict cheyyevaadi filter
+• Produces 1-2 page cited report— structured, professional output
+• Runs 2–45 min — use notifs   — background lo run avutundi, done aite notify
+```
+
+**How it works internally:**
+
+```
+Step 1: Meeru question type chestam
+Step 2: Claude oka research plan raastundi:
+          - "First, I'll look at X"
+          - "Then compare with Y"
+          - "Finally synthesize Z"
+Step 3: Multiple searches run chestundi (5-20+ searches possible)
+Step 4: Prathi source read, extract, note chestundi
+Step 5: Information cross-reference chestundi (contradictions flag)
+Step 6: 1-2 page structured report raastundi with citations
+Step 7: Complete ayyaka notification vastundi
+```
+
+**Enduku Research Mode use cheyyali?**
+
+```
+Complex questions requiring deep analysis:
+
+  "What is the competitive landscape of AI coding assistants in 2026?"
+  → Web search: oka article istundi
+  → Research: 10+ sources, compare ChatGPT/Claude/Copilot/Cursor,
+              market share, features, pricing — full analyst report
+
+  "Board-ready brief on generative AI adoption in banking?"
+  → Research raasi, formatted, cited, professional
+
+  "Compare LangChain vs LlamaIndex for RAG applications"
+  → Multiple docs read, pros/cons, use cases, code examples synthesize
+
+2–45 minutes:
+  Simple research: 2-5 min
+  Medium analysis: 10-20 min
+  Deep investigation: 30-45 min
+```
+
+---
+
+## 3. Key Differences Table
+
+| Feature | Web Search | Research Mode |
+|---|---|---|
+| **Speed** | 5–15 seconds | 2–45 minutes |
+| **Searches** | 1 quick search | Multiple (5-20+) |
+| **Output** | Single answer + citation | 1-2 page cited report |
+| **Best for** | Facts, prices, recent news | Analysis, strategy, reports |
+| **Works in background** | No | Yes (use notifications) |
+| **Toggle default** | OFF | OFF |
+| **Analogy** | Google search | Research analyst |
+| **Cost** | Included in Pro+ | Included in Pro+ |
+
+---
+
+## 4. Taglines — Deep Meaning
+
+```
+Web Search: "Quick fact. Right now."
+  → Oka question, oka answer, oka source
+  → Speed priority
+  → "What is X?" type questions
+
+Research Mode: "Your analyst. Full brief."
+  → Multiple questions internally generate
+  → Depth priority
+  → "How does X compare to Y, what are implications, what should I do?" type
+  → Boss ki present cheyyataniki brief ready avutundi
+```
+
+---
+
+## 5. Toggle Behavior — Important Note
+
+**Image lo:** "Neither mode stays on — toggle before every new chat"
+
+```
+Default state: Both OFF
+  → Normal Claude conversation = no web access
+  → Claude training data lo unna information only
+
+Web Search turn on cheyyadam:
+  New chat start chesaka toggle → Web Search ON
+  Chat complete ayyaka → automatically OFF
+  Next chat: again toggle cheyyali
+
+Research Mode turn on cheyyadam:
+  Same — prathi new chat lo toggle
+  Background lo run avutundi — notifications enable cheyyandi
+
+Enduku auto-stay off?
+  Privacy: Web access = external calls
+  Cost: Searches have limits (Pro plan lo monthly quota)
+  Intentionality: User deliberately choose cheyyali
+```
+
+---
+
+## 6. Flow — Question to Action
+
+**Image lo flow:**
+
+```
+[Question]
+    ↓
+[Pick the Right Mode]   ← idi most important step!
+    ↓
+[Cited Output]          ← sources tho backed answer/report
+    ↓
+[Share or Act]          ← email cheyyadam, decision teesukoddam, presentation
+```
+
+**"Pick the Right Mode" decision:**
+
+```
+Question type                    | Mode
+---------------------------------+------------------
+Current fact/price/news          | Web Search
+Single specific lookup           | Web Search
+Multi-source deep analysis       | Research Mode
+Competitive intelligence         | Research Mode
+Academic/professional report     | Research Mode
+Quick verification of claim      | Web Search
+Strategy recommendation          | Research Mode
+```
+
+---
+
+## 7. Use Which? — Image lo Examples
+
+**Image lo exact examples:**
+
+```
+Price of something        → Web Search
+  "Tesla stock price?"    → Web Search (real-time, single fact)
+
+Competitive landscape     → Research Mode
+  "Top AI startups in India and their funding?" → Research Mode
+
+Recent news               → Web Search
+  "What happened at Apple event yesterday?"  → Web Search
+
+Board-ready brief         → Research Mode
+  "Executive summary of cloud adoption trends for our Q4 deck?" → Research Mode
+```
+
+**More examples (Telugu context):**
+
+```
+Web Search use cases:
+  "India vs Australia cricket score?"        → fast fact
+  "Hyderabad property rate today?"           → current price
+  "ChatGPT-5 release date?"                  → recent news
+  "Python 3.15 new features?"                → specific lookup
+  "Dollar to rupee rate right now?"          → real-time data
+
+Research Mode use cases:
+  "Comprehensive analysis of AI job market impact on IT sector in India?"
+  "Compare all major RAG frameworks with pros, cons, use cases?"
+  "Board brief: Should our company adopt AI coding assistants?"
+  "Deep dive: LangChain vs AutoGen for enterprise agentic systems?"
+  "Market research report on generative AI in healthcare?"
+```
+
+---
+
+## 8. Pro Tips
+
+```
+Tip 1: Notifications enable cheyyandi
+  Research Mode background lo run avutundi — 2-45 min
+  Notification vasthe open cheyyandi — wait cheyyadam boring
+  Browser notifications + desktop app lo especially useful
+
+Tip 2: Web Search first, Research second
+  Quick check: Web Search lo fast answer
+  If need deep dive: Research Mode lo full analysis
+
+Tip 3: Research Mode prompt clearly raayandi
+  BAD:  "Tell me about AI"
+  GOOD: "Provide a 2-page research report on the competitive landscape
+         of AI coding assistants (GitHub Copilot, Cursor, Claude Code)
+         comparing features, pricing, market share, and user reviews
+         in 2026"
+
+Tip 4: Prathi chat lo toggle cheyyandi
+  Both modes off by default — forget kaaraleddi
+  Browser extension or habit: chat open chesaka check toggle
+
+Tip 5: Citations verify cheyyandi
+  Both modes sources cite chestay
+  Important decisions ki — source links click chesi verify cheyyandi
+  AI hallucinate cheyyocchu — citations = accountability
+```
+
+---
+
+## 9. AI lo Context — Why This Matters for Developers
+
+```
+Developer perspective:
+
+Web Search:
+  → Quick API lookup ("langchain latest version?")
+  → Error message search ("numpy MemoryError fix?")
+  → Recent library changes ("pandas 3.0 breaking changes?")
+
+Research Mode:
+  → Architecture decision ("Which vector DB should I choose for RAG?")
+  → Technology comparison ("FastAPI vs Django for AI microservices?")
+  → Market research ("Most used LLM APIs in enterprise applications 2026?")
+
+LangChain + Web Search:
+  from langchain_community.tools import DuckDuckGoSearchRun
+  search = DuckDuckGoSearchRun()
+  result = search.run("latest claude model api name")
+  # Claude lo built-in Web Search idi same concept
+
+LangChain + Research Mode equivalent:
+  from langchain.agents import AgentExecutor
+  # Multi-step research agent: plan → search → synthesize → report
+  # Research Mode idi internally chestundi
+```
+
+---
+
+## 10. Summary
+
+```
+Web Search:
+  What: oka quick internet search → fast answer
+  When: facts, prices, news, specific lookups
+  How long: 5-15 seconds
+  Output: single answer + citations
+  Tagline: "Quick fact. Right now."
+
+Research Mode:
+  What: autonomous research agent → deep analysis
+  When: analysis, comparison, strategy, reports
+  How long: 2-45 minutes (background)
+  Output: 1-2 page cited report
+  Tagline: "Your analyst. Full brief."
+
+Both:
+  Toggle OFF by default — prathi chat lo enable cheyyali
+  Same toggle bar — different power
+  Citations included — sources verify cheyyochu
+
+Decision rule:
+  "5 seconds lo answer raavacha?"  → Web Search
+  "Full analysis kaavali?"          → Research Mode
+```
