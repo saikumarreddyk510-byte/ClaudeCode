@@ -6,6 +6,142 @@
 
 ---
 
+## Visual Summary: 5 Questions, One Skill
+
+![5 Questions One Skill](assets/five-questions-one-skill.png)
+
+**Simple Telugu-English explanation:**
+
+Ee image cheppedi enti ante, oka good Claude Skill create cheyyali ante mundu **5 questions** ki answer ivvali.
+Aa answers base meeda `SKILL.md` file clear ga design cheyyachu.
+
+### Q1 — What does it do?
+
+Idi skill main job enti ani chepthundi. Task name short ga, clear ga undali.
+Example: "PDF summarize cheyyi", "resume review cheyyi", "SQL query generate cheyyi".
+
+**Why important?** Claude skill ni select cheyyadaniki first `name` and `description` chustundi. Skill purpose unclear ga unte Claude wrong time lo use cheyyachu leda use cheyyakapovachu.
+
+### Q2 — Context needed
+
+Claude ki task complete cheyyadaniki required background details enti?
+Example: company name, audience, tone, format, constraints, examples.
+
+**Why important?** Context lekapothe output generic ga vastundi. Context unte output user situation ki match avtundi.
+
+### Q3 — Output format
+
+Final answer ela undali ani define cheyyali.
+Example: sections, bullets, table, JSON, short answer, detailed answer.
+
+**Why important?** Output format fixed ga unte every time consistent result vastundi. Team lo andariki same style lo output dorukutundi.
+
+### Q4 — Variable / `$ARGUMENTS`
+
+Prati use lo change ayye input ni `$ARGUMENTS` laga treat cheyyali.
+Example: customer name, file path, topic name, selected text.
+
+**Why important?** Skill reusable avtundi. One skill ni different inputs tho multiple times use cheyyachu.
+
+### Q5 — Negative rules
+
+Skill em cheyyakudadhu ani rules define cheyyali.
+Example: "Never invent facts", "Do not change code without asking", "Do not reveal secrets".
+
+**Why important?** Negative rules output ni safe ga and controlled ga keep chestayi.
+
+### Image table meaning
+
+| Question | Skill lo em avtundi? |
+|---|---|
+| What does it do? | Skill `name` and slash command laga use ayye identity |
+| What does Claude need to know? | Skill body lo context/instructions |
+| What does output look like? | Format and length rules |
+| What changes each time? | `$ARGUMENTS` line |
+| What should Claude never do? | Negative instructions |
+
+**Final idea:** 5 questions answer cheste skill design almost complete avtundi. Taruvata Claude aa information ni `SKILL.md` structure lo convert chesi reusable skill laga use cheyyagaladu.
+
+### Example Blueprint: My 5 Answers
+
+![Skill Blueprint Five Answers](assets/skill-blueprint-five-answers.png)
+
+**Simple Telugu-English explanation:**
+
+Ee image lo `Skill_blueprint.txt` example chupistundi. Idi oka skill create cheyyadaniki mundu fill cheyyalsina
+rough planning document laga use avtundi. Ikkada example task: **LinkedIn company page post write cheyyadam**.
+
+#### 1. TASK
+
+`Write a LinkedIn post for our company page on any given topic`
+
+Idi skill main job ni define chestundi. Ante ee skill use chesinappudu Claude LinkedIn post create cheyyali.
+
+**Why important?** Task clear ga unte Claude ki "ee skill exact ga em cheyyali?" ani confusion undadu.
+
+#### 2. CONTEXT Claude always needs
+
+Image lo company, audience, tone, and constraints mention chesaru:
+
+- Company: Apex Digital Solutions
+- Audience: Marketing Directors and CMOs
+- Tone: Direct, insightful, no corporate fluff
+- Constraints: Max 1,200 characters, no more than 3 hashtags, emojis decoration laga use cheyyakudadhu
+
+**Meaning:** Ee details fixed context. Prati LinkedIn post lo company voice and audience same ga undali kabatti skill instructions lo permanent ga pettali.
+
+**Why important?** Context lekapothe Claude generic LinkedIn post rayachu. Context unte post company brand ki match avtundi.
+
+#### 3. OUTPUT FORMAT
+
+Image lo post structure clear ga define chesaru:
+
+- Hook line
+- Body with 3 to 5 short paragraphs
+- One takeaway/question at end
+- 2 to 3 hashtags
+- Length: 800 to 1,200 characters
+- Tone: Confident thought-leadership voice
+
+**Meaning:** Output ela kanipinchali ani exact format chepthundi.
+
+**Why important?** Format define chesthe every time same quality and same structure lo output vastundi.
+
+#### 4. WHAT CHANGES EACH USE (`$ARGUMENTS`)
+
+Image lo `$ARGUMENTS` ante:
+
+`The topic or angle for the post`
+
+**Meaning:** Prati sari user topic different ga istadu. Example: "AI in marketing", "B2B lead generation", "brand trust".
+Aa changing input ni `$ARGUMENTS` place lo Claude use chestundi.
+
+**Why important?** Skill reusable avtundi. Same skill multiple topics ki use cheyyachu.
+
+#### 5. NEVER DO THESE
+
+Image lo negative rules:
+
+- Never start with generic words like "I", "We", "Excited to share"
+- Never use generic phrases like "In today's digital landscape"
+- Never end with generic question like "What do you think?"
+
+**Meaning:** Claude avoid cheyyalsina writing patterns ni clear ga chepthundi.
+
+**Why important?** Negative rules valla boring/generic AI-style writing reduce avtundi. Output more specific and professional ga untundi.
+
+#### Final prompt at bottom
+
+Image bottom lo:
+
+`Please write me a complete, ready-to-use SKILL.md file...`
+
+Idi Claude ki final instruction. Ante above 5 answers base meeda complete `SKILL.md` generate cheyyamani asking.
+
+**Simple flow:** 5 answers fill cheyyi -> Claude ki prompt ivvu -> Claude ready-to-use `SKILL.md` generate chestundi -> skill folder lo save chesi use cheyyachu.
+
+---
+
 ## Architecture Diagram
 
 ```
